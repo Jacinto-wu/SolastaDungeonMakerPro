@@ -1,0 +1,13 @@
+{
+	"Id": "SolastaDungeonMakerPro",
+	"DisplayName": "Dungeon Maker Pro",
+	"Author": "Zappastuff",
+	"Version": "1.2.9.3", 
+	"ManagerVersion": "0.23.0",
+	"Requirements": [ "SolastaModApi" ],
+	"LoadAfter": [ "SolastaModApi", "SolastaModHelpers" ],
+	"AssemblyName": "SolastaDungeonMakerPro.dll",
+	"EntryMethod": "SolastaDungeonMakerPro.Main.Load",
+	"Repository": "https://raw.githubusercontent.com/ThyWoof/SolastaDungeonMakerPro/main/SolastaDungeonMakerPro/Repository.json",
+	"HomePage": "https://www.nexusmods.com/solastacrownofthemagister/mods/181"
+}

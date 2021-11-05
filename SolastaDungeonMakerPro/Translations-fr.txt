@@ -1,0 +1,9 @@
+Screen/&EditorLocationSize3Title	Petite 3X [MODDED]
+Screen/&EditorLocationSize4Title	Petite 4X [MODDED]
+Screen/&EditorLocationSize5Title	Petite 5X [MODDED]
+Screen/&EditorLocationSize6Title	Grande 3X [MODDED]
+Screen/&EditorLocationSize7Title	Grande 4X [MODDED]
+Screen/&EditorLocationSize8Title	Grande 5X [MODDED]
+BlueprintCategory/&FlatRoomsTitle	Salles sans mur
+Gadget/&ParameterScriptTitle Script
+Gadget/&ParameterScriptDescription Ecrivez le script ici
