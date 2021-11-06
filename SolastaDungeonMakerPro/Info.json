@@ -5,7 +5,7 @@
 	"Version": "1.2.9.3", 
 	"ManagerVersion": "0.23.0",
 	"Requirements": [ "SolastaModApi" ],
-	"LoadAfter": [ "SolastaModApi", "SolastaModHelpers" ],
+	"LoadAfter": [ "SolastaModApi" ],
 	"AssemblyName": "SolastaDungeonMakerPro.dll",
 	"EntryMethod": "SolastaDungeonMakerPro.Main.Load",
 	"Repository": "https://raw.githubusercontent.com/ThyWoof/SolastaDungeonMakerPro/main/SolastaDungeonMakerPro/Repository.json",
