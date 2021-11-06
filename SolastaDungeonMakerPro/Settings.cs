@@ -25,7 +25,7 @@ namespace SolastaDungeonMakerPro
             return null;
         }
 
-        internal static bool SolastaDungeonMakerProEnabled
+        internal static bool DungeonMakerProEnabled
         {
             get => GetModAssembly("SolastaModHelpers") == null;
         }

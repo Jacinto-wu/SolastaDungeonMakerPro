@@ -19,7 +19,7 @@ namespace SolastaDungeonMakerPro.Viewers
 
         private static List<CharacterTemplateDefinition> GetCharacterTemplates()
         {
-            if (Templates.Count == 0 && Main.Enabled)
+            if (Templates.Count == 0)
             {
                 var characterTemplateDefinitionDB = DatabaseRepository.GetDatabase<CharacterTemplateDefinition>();
 
@@ -138,9 +138,17 @@ namespace SolastaDungeonMakerPro.Viewers
             UI.Label("Welcome to Dungeon Maker Pro".yellow().bold());
             UI.Div();
 
-            if (!Main.Enabled) return;
+            switch (Main.LOAD_STATE)
+            {
+                case 1:
+                    UI.Label("");
+                    UI.Label("Mod is currently disabled. " + "SolastaModHelpers".orange().bold() + " was detected.");
+                    break;
 
-            DisplayNPCs();
+                case 2:
+                    DisplayNPCs();
+                    break;
+            }
         }
     }
 }

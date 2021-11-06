@@ -262,13 +262,22 @@ namespace SolastaDungeonMakerPro.Viewers
             UI.Label("Welcome to Dungeon Maker Pro".yellow().bold());
             UI.Div();
 
-            if (!Main.Enabled) return;
+            switch (Main.LOAD_STATE)
+            {
+                case 1:
+                    UI.Label("");
+                    UI.Label("Mod is currently disabled. " + "SolastaModHelpers".orange().bold() + " was detected.");
+                    break;
 
-            UI.TabBar(ref selectedPane, null, new NamedAction[] {
-                new NamedAction("Encounter", DisplayEncounterTable),
-                new NamedAction("Bestiary", DisplayBestiary),
-                new NamedAction("NPCs", DisplayNPCs)
-            });
+                case 2:
+                    UI.TabBar(ref selectedPane, null, new NamedAction[] {
+                        new NamedAction("Encounter", DisplayEncounterTable),
+                        new NamedAction("Bestiary", DisplayBestiary),
+                        new NamedAction("NPCs", DisplayNPCs)
+                    });
+                    break;
+            }
+
         }
     }
 }
