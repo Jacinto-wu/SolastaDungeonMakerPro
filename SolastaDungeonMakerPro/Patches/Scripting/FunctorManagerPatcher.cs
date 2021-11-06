@@ -57,6 +57,7 @@ namespace SolastaDungeonMakerPro.Patches.Scripting
 
             if (functorParameters.SourceGadget.UserGadget.GadgetBlueprint.Name != Models.ScriptingContext.ACTIVATOR_SCRIPT_NAME)
             {
+                string eventName = string.Empty;
                 var selectedCharacters = new List<GameLocationCharacter>();
 
                 this.SelectCharacters(functorParameters, selectedCharacters);
@@ -64,21 +65,28 @@ namespace SolastaDungeonMakerPro.Patches.Scripting
                 switch (functorParameters.IntParameter)
                 {
                     case 0:
-                        yield return scriptingContext.RunLuaEvent("on_activate", functorParameters, selectedCharacters);
+                        eventName = "on_activate";
                         break;
 
                     case 1:
-                        yield return scriptingContext.RunLuaEvent("on_deactivate", functorParameters, selectedCharacters);
+                        eventName = "on_deactivate";
                         break;
 
                     case 2:
-                        yield return scriptingContext.RunLuaEvent("on_enable", functorParameters, selectedCharacters);
+                        eventName = "on_enable";
                         break;
 
                     case 3:
-                        yield return scriptingContext.RunLuaEvent("on_disable", functorParameters, selectedCharacters);
+                        eventName = "on_disable";
                         break;
                 }
+
+                if (Main.Settings.DebugLocations)
+                {
+                    Main.Warning($"LUA: {eventName} {functorParameters.SourceGadget.UserGadget.UniqueName} - actors: {selectedCharacters.Count}");
+                }
+
+                yield return scriptingContext.RunLuaEvent("on_disable", functorParameters, selectedCharacters);
             }
 
             if (scriptingContext.FunctorCanExecute)
