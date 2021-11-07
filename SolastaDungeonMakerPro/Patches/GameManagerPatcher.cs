@@ -5,11 +5,10 @@ namespace SolastaDungeonMakerPro.Patches
 {
     internal static class GameManagerPatcher
     {
-
         [HarmonyPatch(typeof(GameManager), "BindPostDatabase")]
         internal static class GameManager_BindPostDatabase_Patch
         {
-            internal static void Postfix(Toggle ___multiplayerToggle)
+            internal static void Postfix()
             {
                 Models.DungeonEditorContext.UpdateAvailableDungeonSizes();
 
