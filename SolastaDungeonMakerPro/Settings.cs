@@ -25,10 +25,10 @@ namespace SolastaDungeonMakerPro
             return null;
         }
 
-        internal static bool DungeonMakerProEnabled
-        {
-            get => GetModAssembly("SolastaModHelpers") == null;
-        }
+        internal static bool DungeonMakerProEnabled => true;
+        //{
+        //    get => GetModAssembly("SolastaModHelpers") == null;
+        //}
 
         internal const string GUID = "bff53ba4bb694bf5a69b3ae280eec118";
 
@@ -60,6 +60,7 @@ namespace SolastaDungeonMakerPro
         public bool FlexibleGadgetsPlacement = false;
         public bool FlexiblePropsPlacement = false;
         public bool DebugLocations = false;
+        public bool UnleashAllMonsters = false;
         public bool UnleashAllNPCs = false;
         public int maxBackupFiles = 10;
 

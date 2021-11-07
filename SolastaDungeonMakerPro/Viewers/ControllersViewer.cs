@@ -51,16 +51,9 @@ namespace SolastaDungeonMakerPro.Viewers
             UI.Label("Welcome to Dungeon Maker Pro".yellow().bold());
             UI.Div();
 
-            switch (Main.LOAD_STATE)
+            if (Main.Enabled)
             {
-                case 1:
-                    UI.Label("");
-                    UI.Label("Mod is currently disabled. " + "SolastaModHelpers".orange().bold() + " was detected.");
-                    break;
-
-                case 2:
-                    DisplayControllerSettings();
-                    break;
+                DisplayControllerSettings();
             }
         }
     }

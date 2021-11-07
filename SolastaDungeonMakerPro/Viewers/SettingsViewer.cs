@@ -100,8 +100,14 @@ namespace SolastaDungeonMakerPro.Viewers
                 Main.Settings.DebugLocations = toggle;
             }
 
+            toggle = Main.Settings.UnleashAllMonsters;
+            if (UI.Toggle("Unleashes NPCs as enemies [need to press SHIFT while clicking Select on gadget panel]", ref toggle))
+            {
+                Main.Settings.UnleashAllMonsters = toggle;
+            }
+
             toggle = Main.Settings.UnleashAllNPCs;
-            if (UI.Toggle("Unleashes monsters as NPCs", ref toggle))
+            if (UI.Toggle("Unleashes enemies as NPCs [need to press SHIFT while clicking Select on gadget panel]", ref toggle))
             {
                 Main.Settings.UnleashAllNPCs = toggle;
             }
@@ -228,18 +234,11 @@ namespace SolastaDungeonMakerPro.Viewers
             UI.Label("Welcome to Dungeon Maker Pro".yellow().bold());
             UI.Div();
 
-            switch (Main.LOAD_STATE)
+            if (Main.Enabled)
             {
-                case 1:
-                    UI.Label("");
-                    UI.Label("Mod is currently disabled. " + "SolastaModHelpers".orange().bold() + " was detected.");
-                    break;
-
-                case 2:
-                    DisplayCampaignsLocationsSettings();
-                    DisplayDungeonMakerSettings();
-                    //DisplayCheats();
-                    break;
+                DisplayCampaignsLocationsSettings();
+                DisplayDungeonMakerSettings();
+                //DisplayCheats();
             }
         }
     }

@@ -2,7 +2,7 @@
 	"Id": "SolastaDungeonMakerPro",
 	"DisplayName": "Dungeon Maker Pro",
 	"Author": "Zappastuff",
-	"Version": "1.2.9.3", 
+	"Version": "1.2.9.4", 
 	"ManagerVersion": "0.23.0",
 	"Requirements": [ "SolastaModApi" ],
 	"LoadAfter": [ "SolastaModApi" ],

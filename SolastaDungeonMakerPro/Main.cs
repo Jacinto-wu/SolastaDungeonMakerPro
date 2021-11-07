@@ -4,13 +4,12 @@ using System.IO;
 using System.Reflection;
 using UnityModManagerNet;
 using ModKit;
-using HarmonyLib;
 
 namespace SolastaDungeonMakerPro
 {
     public class Main
     {
-        public static int LOAD_STATE = 0;
+        public static bool Enabled = false;
         public static readonly string MOD_FOLDER = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         [Conditional("DEBUG")]
@@ -18,7 +17,6 @@ namespace SolastaDungeonMakerPro
         internal static void Error(Exception ex) => Logger?.Error(ex.ToString());
         internal static void Error(string msg) => Logger?.Error(msg);
         internal static void Warning(string msg) => Logger?.Warning(msg);
-        internal static UnityModManager.ModEntry ModEntry;
         internal static UnityModManager.ModEntry.ModLogger Logger { get; private set; }
         internal static ModManager<Core, Settings> Mod;
         internal static MenuManager Menu;
@@ -28,17 +26,16 @@ namespace SolastaDungeonMakerPro
         {
             try
             {
-                var harmony = new Harmony("SolastaDungeonMakerPro");
-                var original = typeof(GameManager).GetMethod("BindPostDatabase");
-                var postfix = typeof(Main).GetMethod("Init");
+                var assembly = Assembly.GetExecutingAssembly();
 
-                ModEntry = modEntry;
                 Logger = modEntry.Logger;
                 Mod = new ModManager<Core, Settings>();
-                Menu = new MenuManager();
+                Mod.Enable(modEntry, assembly);
 
-                harmony.Patch(original, postfix: new HarmonyMethod(postfix));
-                Menu.Enable(modEntry, Assembly.GetExecutingAssembly());
+                Menu = new MenuManager();
+                Menu.Enable(modEntry, assembly);
+
+                Translations.Load(MOD_FOLDER);
             }
             catch (Exception ex)
             {
@@ -49,41 +46,16 @@ namespace SolastaDungeonMakerPro
             return true;
         }
 
-        public static void Init()
+        internal static bool IsModHelpersLoaded()
         {
-            LOAD_STATE = 1;
-
-            if (Settings.DungeonMakerProEnabled)
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                LOAD_STATE = 2;
-
-                Mod.Enable(ModEntry, Assembly.GetExecutingAssembly());
-
-                Translations.Load(MOD_FOLDER);
-
-                Models.DungeonEditorContext.UpdateAvailableDungeonSizes();
-
-                Models.DungeonEditorContext.LoadFlatRooms();
-
-                Models.DungeonEditorContext.UpdateCategories();
-
-                Models.DungeonEditorContext.UpdateGadgetsPlacement();
-                Models.DungeonEditorContext.UpdatePropsPlacement();
-
-                Models.DungeonEditorContext.UnleashGadgetsOnAllEnvironments();
-                Models.DungeonEditorContext.UnleashPropsOnAllEnvironments();
-                Models.DungeonEditorContext.UnleashRoomsOnAllEnvironments();
-
-                Models.DungeonEditorClipboardContext.Init();
-
-                Models.EncountersSpawnContext.RegisterSpawnCommand();
-
-                Models.ScriptingContext.AddLuaScriptGadget();
-
-                Models.TelemaCampaignContext.Load();
-
-                Models.MonsterContext.AddNewMonsters();
+                if (assembly.FullName.Contains("SolastaModHelpers"))
+                {
+                    return true;
+                }
             }
+            return false;
         }
     }
 }
