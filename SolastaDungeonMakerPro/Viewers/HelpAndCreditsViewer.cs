@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SolastaDungeonMakerPro.Viewers
 {
-    public class HelpViewer : IMenuSelectablePage
+    public class HelpAndCreditsViewer : IMenuSelectablePage
     {
         public string Name => "Help & Credits";
 
@@ -12,7 +12,10 @@ namespace SolastaDungeonMakerPro.Viewers
 
         private static Dictionary<string, string> creditsTable = new Dictionary<string, string>
         {
-            { "DubhHerder", "custom monsters" }
+            { "Zappastuff".bold(), "head developer, world renderer reverse-engineer" },
+            { "DubhHerder", "custom monsters" },
+            { "[MAD] SirMadnessTv", "traduction française" },
+            { "Narria", "ModKit creator, developer" }
         };
 
         private static void DisplayHelp()
